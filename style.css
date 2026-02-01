@@ -107,11 +107,39 @@ body {
 /* Cards Container */
 .cards {
     display: flex;
-    justify-content: center;
-    gap: 8px;
+    justify-content: flex-start;
+    align-items: center;
     min-height: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     perspective: 1000px;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 16px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep functionality */
+.cards::-webkit-scrollbar {
+    display: none;
+}
+
+.cards {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Center cards when they fit */
+.cards::before,
+.cards::after {
+    content: '';
+    flex: 1;
+}
+
+.cards .card {
+    flex-shrink: 0;
+    scroll-snap-align: center;
 }
 
 /* Card Styles */
@@ -580,7 +608,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
     min-height: 0;
+    overflow: visible;
 }
 
 /* Blackjack indicator */
